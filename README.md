@@ -1,6 +1,11 @@
 # FishGAN
 Construction of a tropical fish generator (much of the comments below concern generator on kaggle for GPU) 
 
+## Switched to a ProgressiveGAN with WGAN-GP
+- very, very promising, preliminary results are excellent, but slow to train
+- running on Kaggle GPUs, hopefully will produce desired generator soon
+- notebook FishWGAN is uploaded
+
 ## Notes for: RMS lr = 0.001 inputs = 100
 ### Generator = conv2dT 4x1 
 ### Discriminator = conv2d 4x1
@@ -51,6 +56,7 @@ Construction of a tropical fish generator (much of the comments below concern ge
 - Expanded 256-128-64-32 to 256-192-128-96 did not perform very poorly, but it also didn't work as well
 - Using SGD on the discriminator was spectularly unsuccessful
 - My initial implementations of Wasserstein has not performed well with any hyperparameters I have tried
+- Wasserstein through TF-GAN does not work currently, the colab notebook doesn't seem compatible with TF2
 
 # Note On using a TPU:
 - running the generator(noise) step becomes the bottleneck, for whatever reason I can't seem to force to TPU to evaluate the generator
@@ -61,4 +67,3 @@ Construction of a tropical fish generator (much of the comments below concern ge
 - improvements to VGG style architecture
 - asymetric architecture (experiment with others)
 - Dual discriminators
-- Wasserstein through TF-GAN
