@@ -13,7 +13,7 @@ This is the first attempt using a simple DCGAN for the tropical fish generator
 * Generates beautiful images, but no sharp lines
 * Color scheme tends to jump from one epoch to the next (may suggest a lower LR would help)
 * No signs of mode collaspe after 200 epochs, but not really converging either
-* RMSprop seems to work better than Adam
+* RMSprop seems to work better than Adam (b1=0.9; b2=0.999)
 
 ### Notes for: inputs = 100
 #### Generator = conv2dT 4x1, RMSprop lr = 0.00015
@@ -24,6 +24,12 @@ This is the first attempt using a simple DCGAN for the tropical fish generator
 * LR = 0.002 worked okay, but 0.0001 was better
 * FishGANsimple.ipynb produced (note: initialization changed slightly) 
 * model saved as fish_gan_1.h5
+
+![DCGAN GIF](SimpleDCGAN.gif)
+Format: ![Alt Text]
+
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
 
 ### Notes for: Adam lr = 0.00003 inputs = 128 
 #### Generator = conv2dT 4x3
