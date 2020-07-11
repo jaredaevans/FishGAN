@@ -26,10 +26,6 @@ This is the first attempt using a simple DCGAN for the tropical fish generator
 * model saved as fish_gan_1.h5
 
 ![DCGAN GIF](SimpleDCGAN.gif)
-Format: ![Alt Text]
-
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
 
 ### Notes for: Adam lr = 0.00003 inputs = 128 
 #### Generator = conv2dT 4x3
