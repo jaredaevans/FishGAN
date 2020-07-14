@@ -95,9 +95,9 @@ class PixelNorm(Layer):
         base_config = super(PixelNorm, self).get_config()
         return base_config
 
-# this kernel implements equalized learning rate
+# this layer implements equalized learning rate
+# adapted from https://github.com/keras-team/keras/blob/master/keras/layers/convolutional.py
 class Conv2DELR(Conv2D):
-    
     def __init__(self, *args, cHe=None, kernel_initializer=tf.keras.initializers.RandomNormal(stddev=1.), **kwargs):
         if cHe is not None:
             self.c = cHe

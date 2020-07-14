@@ -19,6 +19,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from IPython.display import Image as IpyImage
 
+#note: poor structuring has these hardcoded
 FishDIR='/kaggle/input/cleanedfish/'
 GIFDIR = '/kaggle/working/GIFs/'
 
