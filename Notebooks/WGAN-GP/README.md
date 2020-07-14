@@ -34,7 +34,7 @@ It worked pretty well, I think.  I did not use it for this, but I do want to exp
 Model: "sequential_6"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param    
-=================================================================
+_________________________________________________________________
 dense_6 (Dense)              (None, 8192)              2105344   
 reshape_3 (Reshape)          (None, 8, 8, 128)         0         
 conv2d_transpose_15 (Conv2DT (None, 8, 8, 128)         409728    
@@ -54,7 +54,7 @@ conv2d_transpose_18 (Conv2DT (None, 32, 32, 128)       409728
 pixel_norm_15 (PixelNorm)    (None, 32, 32, 128)       0         
 leaky_re_lu_33 (LeakyReLU)   (None, 32, 32, 128)       0         
 conv2d_transpose_19 (Conv2DT (None, 32, 32, 3)         9603      
-=================================================================
+_________________________________________________________________
 Total params: 3,606,403
 Trainable params: 3,606,403
 Non-trainable params: 0
@@ -64,7 +64,7 @@ Non-trainable params: 0
 Model: "sequential_7"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param    
-=================================================================
+_________________________________________________________________
 conv2d_18 (Conv2D)           (None, 32, 32, 128)       9728      
 leaky_re_lu_34 (LeakyReLU)   (None, 32, 32, 128)       0         
 dropout_15 (Dropout)         (None, 32, 32, 128)       0         
@@ -88,7 +88,7 @@ leaky_re_lu_39 (LeakyReLU)   (None, 4, 4, 256)         0
 mb_st_dev_3 (MBStDev)        (None, 4, 4, 257)         0         
 flatten_3 (Flatten)          (None, 4112)              0         
 dense_7 (Dense)              (None, 1)                 4113      
-=================================================================
+_________________________________________________________________
 Total params: 2,701,841
 Trainable params: 2,701,841
 Non-trainable params: 0
