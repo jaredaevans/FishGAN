@@ -2,15 +2,27 @@
 Construction of a fish generator  
  
 Why fish?  Many fish are very beautiful with extremes in colorations, and shapes, and patterns that have a tremendous spread in presentation.  Rather than aspiring to construct a generator that would make a fish that looks obviously like a subtly different version of an existing fish, my hope is to construct a generator that can make beautiful images of fish that look both unlike any fish I have seen, yet clearly fishy.  
+![WGAN-GP GIF](Notebooks/WGAN-GP/WGAN-GP_32.gif)  
 
-## WGAN-GP (current version)
-![WGAN-GP GIF](Notebooks/WGAN-GP/WGAN-GP_32.gif)   
+## WGAN-GP (current version) 
 This is heavily influenced by ProgressiveGAN (below), but I did not use the progressive aspect. Overall, a big success.  I shrunk the figures to 32x32 and then used those to train the GAN.  See Notebooks/WGAN-GP for specific implementation.
 
 ## ProgressiveGAN with WGAN-GP
-- very promising, but very slow to train
-- could get nice images up to 16x16, were very unstable at 32x32, and dissolved at 64x64
-- notebook FishWGAN is uploaded
+- Very promising, but very, very slow to train.
+- Could get nice images up to 16x16, were very unstable at 32x32, and dissolved at 64x64.
+- Notebook can be found in Notebooks/ProGAN.
 
 ## Simple DCGAN 
-- First attempt at a GAN, went okay - mostly, all modifications made it worse
+- First attempt at a GAN, went okay - mostly, all modifications made it worse.
+- See Notebooks/Simple-DCGAN for code and more extensive README.
+
+### Credit to the following sources for many excellent explanations and some code:
+* https://arxiv.org/abs/1710.10196 (ProGAN)
+* https://keras.io/examples/generative/wgan_gp/
+* https://github.com/keras-team/keras/blob/master/keras/layers/convolutional.py
+* https://machinelearningmastery.com/how-to-implement-progressive-growing-gan-models-in-keras/
+* https://medium.com/@jonathan_hui/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490
+* https://towardsdatascience.com/gan-ways-to-improve-gan-performance-acf37f9f59b
+* https://distill.pub/2016/deconv-checkerboard/
+* <ins>Hands on Machine Learning with Scikit-Learn, Keras, and Tensorflow</ins> by Aurelien Geron
+* <ins>Deep Learning with Python</ins> by Francois Chollet
