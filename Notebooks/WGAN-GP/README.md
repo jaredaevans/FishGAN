@@ -20,29 +20,25 @@ I used a fairly asymmetric architecture to generate this (listed below) with the
 - lr = 0.0001 for the first 200 epochs; lr = 0.00003 for the next 500 epochs; lr = 0.00002 for the next 900 epochs
  
 ## Some things I tried but did not use here:
-* I did NOT use equalized learning rate on the layers.  I might be tempted to try this, but the images are fairly diverse, and this is where I would see this helping most.
+* Despite having encoded it, I did not use equalized learning rate on the conv layers.  I might be tempted to try this, but the images are fairly diverse, and this is where I would see this helping most.
 * I experimented with a randomized learning rate per mini-batch along the way - 
 in essence, I tried to populate the inverse of the learning rate 
 uniformly for both the generator and critic. 
 I also explored adding a rare, large lr to generator for one mini-batch 
 in the hopes that this might help vacate local mimima. 
-It worked pretty well, I think.  I did not use it for this, but I do want to experiment with it more.
+It worked pretty well, I think.  I did not use it for this, but I would like to experiment with it more.
 
 ## Well, how could this be improved?  
 * I could try to restart with an extended architecture that goes to 64x64, but I am pessimistic about this working well.
-* I could try to extend the architecture a la ProGAN, which might work.  
-* I could run it longer, with a low learning rate and I think it will get a bit better - especially on improving the already fishy looking fish, however, I don't think this will do too much to prevent the poor quality images.
+* I could try to extend the architecture a la ProGAN, which might work.  I plan to try this soon.  
+* I could run it longer, with a low learning rate and I think it will get a bit better - especially at improving the already fishy looking fish, however, I don't think this will do too much to prevent the poor quality images.
 
 ## Fishing in a diverse terrain
 
-Some fish are truly wonderful.  Others... not so much.  I took steps to avoid mode-collaspe (Wasserstein and MBStdDev, especially), and the generator has done a great job, but this diversity is also the source of the crappy fish.
-
-![A smooth transition](SmoothTransition.png) 
-
-Above you can see at the ends four pretty decent looking fish.  As I walk from one point of a good fish in the latent space to another, the fish smoothly evolve into one another and we have a nice fish all along the way.  On the other hand, if I consider fish with vastly different shapes and structures: 
-
-![A rough transition](RoughTransition.png)
-
+Some fish are truly wonderful.  Others... not so much.  I took steps to avoid mode-collaspe (Wasserstein and MBStdDev, especially), and the generator has done a great job, but this diversity is also the source of the crappy fish.  
+![A smooth transition](SmoothTransition.png)   
+Above you can see at the ends four pretty decent looking fish.  As I walk from one point of a good fish in the latent space to another, the fish smoothly evolve into one another and we have a nice fish all along the way.  On the other hand, if I consider fish with vastly different shapes and structures:  
+![A rough transition](RoughTransition.png)  
 I lose the intermediate fish, simply because in deforming one image into another, I (and the critic) no longer recognize these intermediate images as fish.  Although my generator makes excellent and very different fish at one point in the plane, the image simply has to stop being fishy as I go from one to another.  Short of losing one of the diverse images, I am not sure how much can really be done when any path to deform one image to another must make something that looks decidedly non-fish-like along the way.   
 
 ## The specific architecture
