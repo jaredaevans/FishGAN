@@ -1,7 +1,7 @@
 # FishGAN
 Construction of a fish generator  
  
-Why fish?  Many fish are very beautiful with extremes in colorations, and shapes, and patterns that have a tremendous spread in presentation.  Rather than aspiring to construct a generator that would make a fish that looks obviously like a subtly different version of an existing fish, my hope is to construct a generator that can make beautiful images of fish that look both unlike any fish I have seen, yet clearly fishy.  
+Why fish?  Many fish are very beautiful with extremes in colorations, shapes, and patterns that have a tremendous spread in presentation.  Rather than aspiring to construct a generator that would make a fish that looks obviously like a subtly different version of an existing fish, my hope is to construct a generator that can make beautiful images of fish that look both unlike any fish I have seen, yet clearly fishy.  
 ![WGAN-GP GIF](Notebooks/WGAN-GP/WGAN-GP_32.gif)  
 
 ## WGAN-GP (current version) 
