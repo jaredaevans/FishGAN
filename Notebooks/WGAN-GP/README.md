@@ -16,8 +16,8 @@ I used a fairly asymmetric architecture to generate this (listed below) with the
 * Used image augmenation - rot=25, wshift=0.05, hshift=0.1, shear=10, zoom=[0.95,1.2], brightness=[0.8,1.4]; also adjusted color saturation using a random.triangle from [0.6,1.4] for R, G, and B individually
 * Used a running average generator for output with an exponential loss of 0.999
 * Ran critic 4 times for every one generator run
-* Used Adam with beta1 = 0, beta2 = 0.99 with a learning rate of:
-- lr = 0.0001 for the first 200 epochs; lr = 0.00003 for the next 500 epochs; lr = 0.00002 for the next 900 epochs
+* Used Adam with beta1 = 0, beta2 = 0.99 (mostly equivalent to RMSprop) with a learning rate of:
+- lr = 0.0001 for the first 200 epochs; lr = 0.00003 for the next 500 epochs; lr = 0.00002 for the next 900 epochs (see discussion below for why I changed the lr with Adam)
  
 ## Some things I tried but did not use here:
 * Despite having encoded it, I did not use equalized learning rate on the conv layers.  I might be tempted to try this, but the images are fairly diverse, and this is where I would see this helping most.
@@ -35,11 +35,14 @@ It worked pretty well, I think.  I did not use it for this, but I would like to 
 
 ## Fishing in a diverse terrain
 
-Some fish are truly wonderful.  Others... not so much.  I took steps to avoid mode-collaspe (Wasserstein and MBStdDev, especially), and the generator has done a great job, but this diversity is also the source of the crappy fish.  
+Some fish are truly wonderful.  Others... not so much.  I took steps to avoid mode-collaspe (Wasserstein and MBStdDev, especially), and the generator has done a great job, but this diversity is probably also the source of the crappy fish.  
 ![A smooth transition](SmoothTransition.png)   
 Above you can see at the ends four pretty decent looking fish.  As I walk from one point of a good fish in the latent space to another, the fish smoothly evolve into one another and we have a nice fish all along the way.  On the other hand, if I consider fish with vastly different shapes and structures:  
 ![A rough transition](RoughTransition.png)  
-I lose the intermediate fish, simply because in deforming one image into another, I (and the critic) no longer recognize these intermediate images as fish.  Although my generator makes excellent and very different fish at one point in the plane, the image simply has to stop being fishy as I go from one to another.  Short of losing one of the diverse images, I am not sure how much can really be done when any path to deform one image to another must make something that looks decidedly non-fish-like along the way.   
+I lose the intermediate fish, simply because in deforming one image into another, I (and the critic) no longer recognize these intermediate images as fish.  Although my generator makes excellent and very different fish at one point in the plane, the image simply has to stop being fishy as I go from one to another.  Short of losing one of the diverse images, I am not sure how much can really be done when any path to deform one image to another must make something that looks decidedly non-fish-like along the way.  Perhaps I am underestimating the creativeness of the network, but I think I  
+
+### Why did you change the learning rate if using Adam?
+That is a good question.  For most purposes, a fixed lr is fine for Adam, as it will adjust and adapt to find the (local) minimum.  In GANs though, the problem is more complex.  The manifold the generator is trying to find the minimum of is itself moving, largely based on the movement of the generator within this manifold.  The state is not a minima, but rather a Nash equilibrium.  In this equilibrium, both players trickle into a steady state where no change of strategy will improve their performance (lower the loss).  When both players are making too large of moves, the equilibrium can be disrupted, and the state can be hard to find again.  Correcting finer features in images becomes challenging when the two players keep making big moves.  This is also the motivation for trying the randomized learning rate I mentioned above.   
 
 ## The specific architecture
 ### Generator
