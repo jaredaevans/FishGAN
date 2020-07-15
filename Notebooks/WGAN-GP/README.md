@@ -17,7 +17,7 @@ I used a fairly asymmetric architecture to generate this (listed below) with the
 * Used a running average generator for output with an exponential loss of 0.999
 * Ran critic 4 times for every one generator run
 * Used Adam with beta1 = 0, beta2 = 0.99 with a learning rate of:
-- lr = 0.0001 for the first 200 epochs; lr = 0.00003 for the next 500 epochs
+- lr = 0.0001 for the first 200 epochs; lr = 0.00003 for the next 500 epochs; lr = 0.00002 for the next 900 epochs
  
 ## Some things I tried but did not use here:
 * I did NOT use equalized learning rate on the layers.  I might be tempted to try this, but the images are fairly diverse, and this is where I would see this helping most.
@@ -43,8 +43,7 @@ Above you can see at the ends four pretty decent looking fish.  As I walk from o
 
 ![A rough transition](RoughTransition.png)
 
-I lose the intermediate fish, simply because in deforming one image into another, I (and the critic) no longer recognize these intermediate images as fish.  
-Although my generator makes excellent and very different fish at one point in the plane, the image simply has to atop being fishy as I go from one to another.  Short of losing one of the diverse images, I am not sure how much can really be done when any path to deform one image to another must make something that looks decidedly non-fish-like on the way.   
+I lose the intermediate fish, simply because in deforming one image into another, I (and the critic) no longer recognize these intermediate images as fish.  Although my generator makes excellent and very different fish at one point in the plane, the image simply has to stop being fishy as I go from one to another.  Short of losing one of the diverse images, I am not sure how much can really be done when any path to deform one image to another must make something that looks decidedly non-fish-like along the way.   
 
 ## The specific architecture
 ### Generator
