@@ -1,6 +1,6 @@
 # WGAN-GP
 
-![WGAN-GP 64 GIF](WGANGP_64.gif)
+![WGAN-GP 64 GIF](WGANGPU64.gif)
 
 This is heavily influenced by ProgressiveGAN, but I didn't use the progressive aspect. Overall, a big success.  This is an expansion of the 32x32 case.  I grew the next and ran for a bit longer on 64x64 images and then used those to train the GAN.  See WGAN-GP-64.ipynb for specific implementations.
 
