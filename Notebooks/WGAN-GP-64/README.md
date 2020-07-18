@@ -21,6 +21,13 @@ I used a fairly asymmetric architecture to generate this (listed below) with the
 ## Some things I tried but did not use here:
 * Despite having encoded it, I did not use equalized learning rate on the conv layers.  I might be tempted to try this, but the images are fairly diverse, and this is where I would see this helping most.
 
+## How good is the ultimate generator?
+
+Tough question!  Implicit in many metrics, such as inception score, is that the generator is producing multiple classes.  Here, we just have one class: fish (despite the obvious proximinty to nudibranchs here).  One thing that is easy to check is the minimum pixel distance (l2) to other images in the set.  If the real-real, fake-fake, real-fake measures were wildly disparate, it could tell us several things.  First, is there is a fake-fake clustering near 0, this might indicate a bit of partial mode collaspe.  Alternatively, if there is an enhancement of real-fake near zero, this might indicate that the generator is copying the images.  If the fake-fake tails are smaller than the real-real, that may suggest that there is less diversity.  None of this is terribly rigorous, but the samples and distributions both look good across all three.
+
+![Pixel Distributions](pixelDistributions.png)
+
+
 ## Well, how could this be improved?  
 * I could try to restart with an extended architecture that goes to 128x128.
 * I could try to extend the architecture a la ProGAN, which might work.  I did not build the network to handle this though.  
