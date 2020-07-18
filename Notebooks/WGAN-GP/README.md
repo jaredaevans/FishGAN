@@ -5,7 +5,6 @@
 This is heavily influenced by ProgressiveGAN, but I didn't use the progressive aspect. Overall, a big success.  I shrunk the figures to 32x32 and then used those to train the GAN.  See WGAN-GP.ipynb for specific implementations.
 
 ## The implementation
-
 I used a fairly asymmetric architecture to generate this (listed below) with the following aspects included:  
 * Wasserstein metric with gradient penalty lambda=10.0 (WGAN-GP)
 * Pixel normalization in the generator
@@ -24,25 +23,24 @@ I used a fairly asymmetric architecture to generate this (listed below) with the
 * I experimented with a randomized learning rate per mini-batch along the way - 
 in essence, I tried to populate the inverse of the learning rate 
 uniformly for both the generator and critic. 
-I also explored adding a rare, large lr to generator for one mini-batch 
-in the hopes that this might help vacate local mimima. 
-It worked pretty well, I think.  I did not use it for this, but I would like to experiment with it more.
+I also explored adding a rare, large lr to generator for one mini-batch in the hopes that this might help vacate local mimima. 
+It worked pretty well, I think.  I did not use it for this, but I would like to experiment with the idea more.
 
 ## Well, how could this be improved?  
-* I could try to restart with an extended architecture that goes to 64x64, but I am pessimistic about this working well.
-* I could try to extend the architecture a la ProGAN, which might work.  I plan to try this soon.  
+* I could try to restart with an extended architecture that goes to 64x64 - preliminary results are showing promise!
+* I could try to extend the architecture a la ProGAN, which might work.  I did not build the network to handle this though.  
 * I could run it longer, with a low learning rate and I think it will get a bit better - especially at improving the already fishy looking fish, however, I don't think this will do too much to prevent the poor quality images.
 
 ## Fishing in a diverse terrain
 
-Some fish are truly wonderful.  Others... not so much.  I took steps to avoid mode-collaspe (Wasserstein and MBStdDev, especially), and the generator has done a great job, but this diversity is probably also the source of the crappy fish.  
+Some fish are truly wonderful.  Others... not so much.  I took steps to avoid mode-collaspe (Wasserstein and MBStdDev, especially), and the generator has done a great job at producing a diverse array of fish, but this diversity is probably also the source of the crappy fish.  
 ![A smooth transition](SmoothTransition.png)   
 Above you can see at the ends four pretty decent looking fish.  As I walk from one point of a good fish in the latent space to another, the fish smoothly evolve into one another and we have a nice fish all along the way.  On the other hand, if I consider fish with vastly different shapes and structures:  
 ![A rough transition](RoughTransition.png)  
-I lose the intermediate fish, simply because in deforming one image into another, I (and the critic) no longer recognize these intermediate images as fish.  Although my generator makes excellent and very different fish at one point in the plane, the image simply has to stop being fishy as I go from one to another.  Short of losing one of the diverse images, I am not sure how much can really be done when any path to deform one image to another must make something that looks decidedly non-fish-like along the way.  Perhaps I am underestimating the creativeness of the network, but I think I  
+I lose the intermediate fish, simply because in deforming one image into another, I (and the critic) no longer recognize these intermediate images as fish.  Although my generator makes excellent and very different fish at one point in the plane, the image simply has to stop being fishy as I go from one to another.  Short of losing one of the diverse images, I am not sure how much can really be done when any path to deform one image to another must make something that looks decidedly non-fish-like along the way.  Perhaps I am underestimating the creativeness of the network, but I think it is an inescapable problem.  That said, surely more of the journey could look fish-like.  
 
 ### Why did you change the learning rate if using Adam?
-That is a good question.  For most purposes, a fixed lr is fine for Adam, as it will adjust and adapt to find the (local) minimum.  In GANs though, the problem is more complex.  The manifold the generator is trying to find the minimum of is itself moving, largely based on the movement of the generator within this manifold.  The state is not a minima, but rather a Nash equilibrium.  In this equilibrium, both players trickle into a steady state where no change of strategy will improve their performance (lower the loss).  When both players are making too large of moves, the equilibrium can be disrupted, and the state can be hard to find again.  Correcting finer features in images becomes challenging when the two players keep making big moves.  This is also the motivation for trying the randomized learning rate I mentioned above.   
+That is a good question.  For most purposes, a fixed lr is fine for Adam, as it will adjust and adapt to find the (local) minimum.  In GANs though, the problem is more complex.  The manifold the generator is trying to find the minimum of is itself moving, largely based on the movement of the generator within this manifold.  The state is not a minima, but rather a Nash equilibrium.  In this equilibrium, both players trickle into a steady state where no change of strategy will improve their performance (lower the loss).  When both players are making too large of moves, the equilibrium can either become unable to settle further or even become disrupted making a stable state hard to find again.  Correcting finer features in images becomes challenging when the two players keep making big moves.  This is also the motivation for trying the randomized learning rate I mentioned above.   
 
 ## The specific architecture
 ### Generator
